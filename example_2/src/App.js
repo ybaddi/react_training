@@ -9,7 +9,6 @@ function Todo (props) {
     <li>
     {todo.text} <button onClick={completTasks} >Done</button>
     </li>
-
    )
 }
 

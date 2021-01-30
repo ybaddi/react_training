@@ -5,7 +5,7 @@ import './App.css';
 
 import {Component} from 'react';
 import ViewUser from './component/ViewUser';
-import { getUsers, deletetUser } from './api/Users'
+import { getUsers, deletetUser, updateUser, addUser } from './api/Users'
 import UsersForm from './component/UsersForm'
 
 
@@ -54,6 +54,40 @@ this.setState({
 
       }
 
+
+      updateUser= (user) => {
+        const id = this.state.user.id;
+        updateUser(id,user)
+        .then(() => {
+          alert('Success');
+
+          let updatedUser = this.state.user;
+          let users = this.state.users;
+          const index = users.indexOf(updatedUser);
+          users.splice(index,1);
+          users.push(this.state.user);
+          this.setState({
+              users
+          });
+        });
+      }
+
+
+
+      addUser = (user)=>{
+        addUser(user)
+      .then(() => {
+        alert('Success');
+        let users = this.state.users;
+        users.push(user);
+        this.setState({
+            users
+        });
+      }).catch(
+        (error) => { console.log(error)
+      });
+    }
+
   render(){
   return (
     <div className="App">
@@ -74,8 +108,20 @@ this.setState({
       <div>
         <h3>Edit User</h3>
         {this.state.user.id>0 ? (
-        <UsersForm values={this.state.user} onSubmit={(values) => {console.log(values)}} />
+        <UsersForm values={this.state.user} 
+        onSubmit={this.updateUser} />
         ): 'select a user from the list' }
+      </div>
+
+      <div>
+        <h3>Add User</h3>
+        
+        <UsersForm values={{
+          name:'',
+          email:''
+        }} 
+        onSubmit={this.addUser} />
+        
       </div>
     </div>
   );

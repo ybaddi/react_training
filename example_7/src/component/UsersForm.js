@@ -6,7 +6,7 @@ export default function UsersForm(props){
 
 const schema = Yup.object().shape({
     name: Yup.string().required(),
-    email: Yup.string().required()
+    email: Yup.string().email().required()
 });
 
     return <Formik 
@@ -15,15 +15,15 @@ const schema = Yup.object().shape({
        onSubmit={props.onSubmit}
        validationSchema = {schema}
        render={ props => {
-           return <form>
+           return <form onSubmit={props.handleSubmit}>
                <labe>Name</labe>
                <Field name='name' />
-               <ErrorMessage name='name'/>
+               <ErrorMessage name='name'/> <br/>
 
 
                <labe>Email</labe>
                <Field name='email' />
-               <ErrorMessage name='email'/>
+               <ErrorMessage name='email'/> <br/>
 
                <button type="submit">Send</button>
            </form>

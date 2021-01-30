@@ -6,6 +6,7 @@ import './App.css';
 import {Component} from 'react';
 import ViewUser from './component/ViewUser';
 import { getUsers, deletetUser } from './api/Users'
+import UsersForm from './component/UsersForm'
 
 
 class App extends Component {
@@ -69,6 +70,12 @@ this.setState({
         <h3>User details</h3>
         {this.state.user.id>0 ? ( <ViewUser user={this.state.user} />
         ) : 'select a user from the list' }
+      </div>
+      <div>
+        <h3>Edit User</h3>
+        {this.state.user.id>0 ? (
+        <UsersForm values={this.state.user} onSubmit={(values) => {console.log(values)}} />
+        ): 'select a user from the list' }
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 
-import axios from 'axios'
+
 
 import {Component} from 'react';
 import ViewUser from './component/ViewUser';
-import { getUsers } from './api/Users'
+import { getUsers, deletetUser } from './api/Users'
 
 
 class App extends Component {
@@ -20,6 +20,8 @@ class App extends Component {
       this.setState({
         users: response.data
       })
+    }).catch(error => {
+      alert('error de backend');
     });
   }
 
@@ -30,6 +32,27 @@ this.setState({
 })
   }
 
+  deleteUser = (user) => {
+    
+      
+
+      // delete fom server
+      deletetUser(user.id)
+      .then( () => {
+// delete user from state
+let users = this.state.users;
+const index = users.indexOf(user);
+users.splice(index,1);
+this.setState({
+  users
+});
+      })
+      .catch(error => {
+        alert(error);
+      });
+
+      }
+
   render(){
   return (
     <div className="App">
@@ -37,6 +60,7 @@ this.setState({
         { this.state.users.map((user,index)=>
           <li key={index}>{user.name} {' '}
           <button onClick={() => this.setActive(user)} > view</button>
+          <button onClick={() => this.deleteUser(user)} > delete</button>
           </li>
         ) }
         

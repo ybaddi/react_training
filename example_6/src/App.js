@@ -1,25 +1,41 @@
 import logo from './logo.svg';
 import './App.css';
 
+import classnames from 'classnames';
+
 import {Component} from 'react'
 
 class  App extends Component {
 
   state={
-    className: 'bg-green'
+    active: true
   }
   render(){
-    const style = {color:'white', fontWeight:'bold'} ; 
+    let classes = '';
+ 
+    if(true){
+      classes += 'bg-green ';
+    }
+    if(true){
+      classes += 'whiteTest ';
+    }
+    if(true){
+      classes += 'boldText ';
+    }
+
+    let classes_1 = classnames({green: 1>0, whiteTest:  6 < 4, boldText: 8 == 8});
+
+
+
     return (
     <div>
-      <div className={this.state.className} style={style}>
+      <div className={classes_1} >
         Text test
       </div>
 
-      <button onClick= {() => {this.setState({className:'bg-blue'})}} > 
-      change bg to blue</button>
-      <button onClick= {() => {this.setState({className:'bg-green'})}} > 
-      change bg to green</button>
+      <button onClick= {() => {this.setState({active: !this.state.active})}} > 
+      change active</button>
+      
     </div>
   );
     }

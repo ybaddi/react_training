@@ -9,6 +9,7 @@ import {Component} from 'react';
 
 import UsersPage from './pages/UsersPage'
 import UserPage from './pages/UserPage'
+import EditUserPage from './pages/EditUserPage'
 
 import { BrowserRouter, Route, Link} from 'react-router-dom';
 
@@ -30,6 +31,7 @@ class App extends Component {
        <Route path="/" exact component={HomePage} />
        <Route path="/users" exact component={UsersPage} />
        <Route path="/users/:id" exact component={UserPage} />
+       <Route path="/users/edit/:id" exact component={EditUserPage} />
        <Route path="/about"  component={AboutPage} />
     </div>
     </BrowserRouter>

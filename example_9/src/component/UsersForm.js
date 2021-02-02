@@ -21,7 +21,7 @@ const schema = Yup.object().shape({
                <ErrorMessage name='name'/> <br/>
 
 
-               <labe>Email</labe>
+               <label>Email</label>
                <Field name='email' />
                <ErrorMessage name='email'/> <br/>
 

@@ -51,22 +51,7 @@ export default class UsersPage extends Component{
               }
         
         
-              updateUser= (user) => {
-                const id = this.state.user.id;
-                updateUser(id,user)
-                .then(() => {
-                  alert('Success');
-        
-                  let updatedUser = this.state.user;
-                  let users = this.state.users;
-                  const index = users.indexOf(updatedUser);
-                  users.splice(index,1);
-                  users.push(this.state.user);
-                  this.setState({
-                      users
-                  });
-                });
-              }
+              
         
         
         
@@ -94,18 +79,19 @@ export default class UsersPage extends Component{
           {/* <button onClick={() => this.setActive(user)} > view</button>
           <button onClick={() => this.deleteUser(user)} > delete</button> */}
           <Link to={"users/"+ user.id}>View</Link>
+          <Link to={"users/edit/"+ user.id}>Edit</Link>
           </li>
         ) }
         
       </ul>
       
-    <div>
+    {/* <div>
       <h3>Edit User</h3>
       {this.state.user.id>0 ? (
       <UsersForm values={this.state.user} 
       onSubmit={this.updateUser} />
       ): 'select a user from the list' }
-    </div>
+    </div> */}
 
     <div>
       <h3>Add User</h3>

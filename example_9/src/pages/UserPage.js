@@ -10,6 +10,7 @@ export default class UserPage extends Component{
 
     componentDidMount = () => {
         const userID = this.props.match.params.id;
+        console.log(userID);
         getUser(userID).then(response => {
             this.setState({
                 user: response.data

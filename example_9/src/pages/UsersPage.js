@@ -85,24 +85,9 @@ export default class UsersPage extends Component{
         
       </ul>
       
-    {/* <div>
-      <h3>Edit User</h3>
-      {this.state.user.id>0 ? (
-      <UsersForm values={this.state.user} 
-      onSubmit={this.updateUser} />
-      ): 'select a user from the list' }
-    </div> */}
+    
 
-    <div>
-      <h3>Add User</h3>
-      
-      <UsersForm values={{
-        name:'',
-        email:''
-      }} 
-      onSubmit={this.addUser} />
-      
-    </div>
+    
   </div>
       );
    }

@@ -12,6 +12,8 @@ import UserPage from './pages/UserPage';
 import EditUserPage from './pages/EditUserPage';
 import CreateUserPage from './pages/CreateUserPage';
 
+import NotFound from './pages/NotFoundPage';
+
 import { BrowserRouter, Route, NavLink, Switch} from 'react-router-dom';
 
 
@@ -40,6 +42,7 @@ class App extends Component {
           <Route path="/users/:id" exact component={UserPage} />
           <Route path="/users/edit/:id" exact component={EditUserPage} />
           <Route path="/about"  component={AboutPage} />
+          <Route component={NotFound} />
        </Switch>
     </div>
     </BrowserRouter>

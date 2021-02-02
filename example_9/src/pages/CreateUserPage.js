@@ -2,6 +2,8 @@ import { Component } from "react";
 import { addUser } from '../api/Users';
 import UsersForm from "../component/UsersForm";
 
+
+
 export default class CreateUserPage extends Component{
 
     state = {
@@ -24,6 +26,7 @@ export default class CreateUserPage extends Component{
     render(){
         return (<div>
             <h3>Add User</h3>
+            
             <UsersForm values={this.state.user} onSubmit={this.addUser}/>
           </div>)
     }

@@ -1,6 +1,7 @@
 import React from "react";
 import { ErrorMessage, Field, Formik } from "formik";
 import * as Yup from 'yup'
+import { Prompt } from 'react-router-dom';
 
 export default function UsersForm(props){
 
@@ -9,6 +10,8 @@ const schema = Yup.object().shape({
     email: Yup.string().email().required()
 });
 
+
+
     return <Formik 
        initialValues={props.values}
        enableReinitialize={true}
@@ -16,6 +19,7 @@ const schema = Yup.object().shape({
        validationSchema = {schema}
        render={ props => {
            return <form onSubmit={props.handleSubmit}>
+               <Prompt when={props.dirty} message={'are you sure?'}/>
                <label>Name</label>
                <Field name='name' />
                <ErrorMessage name='name'/> <br/>

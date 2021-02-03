@@ -1,6 +1,8 @@
 import React from 'react'
 
 import {getById} from '../api/product';
+import {connect} from 'react-redux';
+import {addToCart} from '../store/actions/actions'
 
  class Product extends React.Component{
      state={
@@ -10,16 +12,17 @@ import {getById} from '../api/product';
      }
      componentDidMount = ( ) => {
          const id = this.props.match.params.id;
-         console.log(id);
+        //  console.log(id);
          getById(id).then((data) => {
-            console.log(data);
-            setTimeout( () => {
+            // console.log(data);            
             this.setState({
+                quantity: this.state.quantity,
                 product: data,
                 loading: false
             });
-        }, 2000);
-         });
+            // console.log(data);
+        }
+         );
      }
 
      handleQuantityChange = (event) => {
@@ -32,7 +35,14 @@ import {getById} from '../api/product';
           })
         }
      }
-    render(){
+
+
+     addToCart = (product) => {
+        // console.log(product);
+        this.props.addToCart(product, this.state.quantity);
+     }
+    
+     render(){
     
         if(this.state.loading){
             return "loading ...";
@@ -60,7 +70,9 @@ import {getById} from '../api/product';
                         <br/>
                         <p>Totla: {quantity * product.price}</p>
                         <br/>
-                        <button className="btn btn-primary" >add to cart</button>
+                        <button className="btn btn-primary" onClick={() => this.addToCart(product)} >
+                            add to cart
+                            </button>
                     </div>
             
                 </div>
@@ -74,5 +86,10 @@ import {getById} from '../api/product';
 }
 
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToCart: (productInfo, quantity) => dispatch(addToCart(productInfo, quantity))
+    };
+}
 
-export default Product;
+export default  connect(null, mapDispatchToProps)(Product)

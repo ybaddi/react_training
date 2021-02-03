@@ -1,8 +1,22 @@
 import React from 'react'
 
-export default function CartItem(props){
-    const {item} = props;
+import {connect} from 'react-redux'
+import {removeFromCart} from '../store/actions/actions'
+
+ class CartItem extends React.Component{
+
+    constructor(props){
+        super(props);
+    }
+
+    removeFromCart = (index) => {
+        this.props.removeFromCart(index);
+    }
+
+     render(){
+    const {item} = this.props;
     const {product} = item;
+    const {index} = this.props;
     return (
     
         
@@ -20,12 +34,23 @@ Total Price : {product.price * item.quantity}
                                             <br/>
                                             </p>
                                             
-                    <a href={"/products/" + product.id} className="btn btn-danger">
+                    <button  className="btn btn-danger"
+                    onClick={() => this.removeFromCart(index)}>
                         <i className="fa fa-trash" />
                          delete
-                        </a>
+                        </button>
                 </div>
             </div>
 
     )
+     }
 }
+
+
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removeFromCart: (index) => dispatch(removeFromCart(index))
+    };
+}
+export default connect(null, mapDispatchToProps)(CartItem)

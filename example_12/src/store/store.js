@@ -1,28 +1,11 @@
 import {createStore} from 'redux';
 
+import cartReducer from './reducers/index'
+
 
 const initalState= {
     cart: [
-        { product: {
-            "id":2,
-            "title": "produit 2",
-            "price": 200,
-            "image" : "/imgs/img1.jpg",
-            "description":"description1"
-    
-            },
-            quantity: 5
-        },
-        { product: {
-            "id":1,
-            "title": "produit 2",
-            "price": 100,
-            "image" : "/imgs/img1.jpg",
-            "description":"description1"
-    
-            },
-            quantity: 4
-        }
+        
     ]
 };
 
@@ -31,7 +14,8 @@ function reducers(state){
 }
 
 
-const store = createStore(reducers, initalState);
+const store = createStore(cartReducer, initalState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 
 export default store;

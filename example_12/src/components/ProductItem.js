@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link} from 'react-router-dom';
 
 export default function ProductItem(props){
     const product = props.product;
@@ -13,7 +14,8 @@ export default function ProductItem(props){
                         {product.price} euro
                                             </p>
                                             
-                    <a href={"/products/" + product.id} className="btn btn-primary">Go somewhere</a>
+                    <Link to={"/products/" + product.id} 
+                    className="btn btn-primary">Go somewhere</Link>
                 </div>
             </div>
 

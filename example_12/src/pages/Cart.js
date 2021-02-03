@@ -4,6 +4,8 @@ import CartItem from '../components/CartItem';
 import {getAll} from '../api/product'
 import {connect} from 'react-redux'
 
+import {removeFromCart} from '../store/actions/actions'
+
 class Cart extends React.Component{
 
     
@@ -12,9 +14,9 @@ render(){
     <div>
         <h1>Product</h1>
         <div className={'row'}>
-            {this.props.cartitems.map( (item) => 
-                <div className={'col-3'} key={item.product.id}>
-                    <CartItem item={item}></CartItem>
+            {this.props.cartitems.map( (item,index) => 
+                <div className={'col-3'} key={index}>
+                    <CartItem index={index} item={item}></CartItem>
 
                 </div>
                 )}
@@ -40,5 +42,6 @@ const mapStateToProps = (state) => {
         total : state.cart.reduce( (total, item) => 
         total+ item.product.price * item.quantity, 0)
     };
-    }
+}
+
 export default connect(mapStateToProps)(Cart)

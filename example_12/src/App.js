@@ -7,10 +7,14 @@ import Products from './pages/Products';
 import Product from './pages/Product.js';
 import Cart from './pages/Cart';
 import CartIcon from './components/CartIcon';
+import {Provider} from 'react-redux';
+import store from './store/store'
+
+
 
 function App() {
   return (
-
+    
     <Router>
     <div className="container">
 
@@ -56,4 +60,10 @@ function App() {
   );
 }
 
-export default App;
+function AppWithStore(){
+  return <Provider store={store}>
+    <App />
+  </Provider>
+}
+
+export default AppWithStore;

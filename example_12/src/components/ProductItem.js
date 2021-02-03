@@ -12,7 +12,7 @@ export default function ProductItem(props){
                     <p className="card-text">
                         {product.price} euro
                                             </p>
-                                            <p>{product.description}</p>
+                                            
                     <a href={"/products/" + product.id} className="btn btn-primary">Go somewhere</a>
                 </div>
             </div>

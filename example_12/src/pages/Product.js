@@ -1,40 +1,78 @@
 import React from 'react'
-import ProductItem from '../components/ProductItem';
 
-import getAll from '../api/product'
+import {getById} from '../api/product';
 
-class Product extends React.Component{
-
-    state = {
-        products: []
-    }
-    componentDidMount= () =>{
-        getAll().then(response => {
-            console.log(response);
+ class Product extends React.Component{
+     state={
+         loading: true,
+         quantity: 2,
+         product: {}
+     }
+     componentDidMount = ( ) => {
+         const id = this.props.match.params.id;
+         console.log(id);
+         getById(id).then((data) => {
+            console.log(data);
+            setTimeout( () => {
             this.setState({
-                products: response
-            })
-        })
-    }
-render(){
-    return (
-    <div>
-        <h1>Product</h1>
-        <div className={'row'}>
-            {this.state.products.map( (product, index) => { return (
-                <div className={'col-4'} key={product.id}>
-                    <ProductItem product={product}></ProductItem>
+                product: data,
+                loading: false
+            });
+        }, 2000);
+         });
+     }
+
+     handleQuantityChange = (event) => {
+         const value = event.target.value;
+         if(value <0 ){
+             return;
+         }else{
+          this.setState({
+              quantity: value
+          })
+        }
+     }
+    render(){
+    
+        if(this.state.loading){
+            return "loading ...";
+        }else{
+            const product = this.state.product;
+            const quantity = this.state.quantity;
+            return (
+        <div>
+            <h1>{product.title}</h1>
+            <div className={'row'}>
+                <div className={'col-6'}>
+                    <img src={product.image} width={'100%'} className="card-img-top" alt="..."/>
+                
                 </div>
-            )})}
-        
-        
-        
+                <div className={'col-6'}>
+                    <div className="card-body">
+                        <h5 className="card-title">{product.title}</h5>
+                        <p className="card-text">
+                            {product.price} euro
+                                                </p>
+                                                <p>{product.description}</p>
+                                                <br />
+
+                        <input type="number"  value={quantity} onChange={this.handleQuantityChange}/> <br/>
+                        <br/>
+                        <p>Totla: {quantity * product.price}</p>
+                        <br/>
+                        <button className="btn btn-primary" >add to cart</button>
+                    </div>
+            
+                </div>
+            </div>
+            
         </div>
-
-    </div>)
+        );
+        }
+    
+    }
 }
 
 
-}
 
 export default Product;

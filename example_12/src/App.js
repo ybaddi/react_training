@@ -3,8 +3,10 @@ import './App.css';
 import Home from './pages/Home';
 
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import Product from './pages/Product';
+import Products from './pages/Products';
+import Product from './pages/Product.js';
 import Cart from './pages/Cart';
+import CartIcon from './components/CartIcon';
 
 function App() {
   return (
@@ -25,7 +27,7 @@ function App() {
         
       </li>
       <li className="nav-item">
-      <Link className="nav-link" to="/product" >Products</Link>
+      <Link className="nav-link" to="/products" >Products</Link>
         
       </li>
 
@@ -38,11 +40,15 @@ function App() {
     </ul>
     
   </div>
+
+  <CartIcon />
 </nav>
 
 
 <Route path="/" exact component={Home}></Route>
-<Route path="/product" component={Product}></Route>
+<Route path="/products" exact component={Products}></Route>
+
+<Route path="/products/:id" component={Product}></Route>
 <Route path="/cart" component={Cart}></Route>
       
     </div>
